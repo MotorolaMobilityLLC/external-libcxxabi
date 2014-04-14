@@ -43,7 +43,7 @@
   #define _LIBUNWIND_SUPPORT_FRAME_APIS   (__i386__ || __x86_64__)
   #define _LIBUNWIND_EXPORT               __attribute__((visibility("default")))
   #define _LIBUNWIND_HIDDEN               __attribute__((visibility("hidden")))
-  #define _LIBUNWIND_LOG(msg, ...) fprintf(stderr, "libunwind: " msg, __VA_ARGS__)
+  #define _LIBUNWIND_LOG(msg, ...) fprintf(stderr, "libuwind: " msg, __VA_ARGS__)
   #define _LIBUNWIND_ABORT(msg) __assert_rtn(__func__, __FILE__, __LINE__, msg)
 
   #if FOR_DYLD
@@ -56,18 +56,6 @@
     #define _LIBUNWIND_SUPPORT_DWARF_INDEX    0
   #endif
 
-#elif defined(__BIONIC__)
-  #define _LIBUNWIND_BUILD_ZERO_COST_APIS (__i386__ || __x86_64__ || __arm64__ || __arm__)
-  #define _LIBUNWIND_BUILD_SJLJ_APIS      0
-  #define _LIBUNWIND_SUPPORT_FRAME_APIS   (__i386__ || __x86_64__)
-  #define _LIBUNWIND_EXPORT               __attribute__((visibility("default")))
-  #define _LIBUNWIND_HIDDEN               __attribute__((visibility("hidden")))
-  #define _LIBUNWIND_LOG(msg, ...)        fprintf(stderr, "libunwind: " msg, __VA_ARGS__)
-  #define _LIBUNWIND_ABORT(msg)           __assert2(__FILE__, __LINE__, __func__, msg)
-
-  #define _LIBUNWIND_SUPPORT_COMPACT_UNWIND 1
-  #define _LIBUNWIND_SUPPORT_DWARF_UNWIND   1
-  #define _LIBUNWIND_SUPPORT_DWARF_INDEX    0
 #else
   // #define _LIBUNWIND_BUILD_ZERO_COST_APIS
   // #define _LIBUNWIND_BUILD_SJLJ_APIS
