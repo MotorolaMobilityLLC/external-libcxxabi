@@ -54,7 +54,6 @@ LIBCXXABI_RTTI_FLAG := -frtti
 LIBCXXABI_CPPFLAGS := \
 	-Iexternal/libcxx/include/ \
 	-std=c++11 \
-	-stdlib=libc++ \
 	-fexceptions \
 
 include $(CLEAR_VARS)
@@ -75,9 +74,24 @@ include $(BUILD_SHARED_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE := libcxxabi
 LOCAL_CLANG := true
+
 LOCAL_SRC_FILES := $(LIBCXXABI_SRC_FILES)
+
+ifneq ($(TARGET_ARCH),$(filter $(TARGET_ARCH),x86 x86_64))
+LOCAL_SRC_FILES += src/Unwind/UnwindRegistersRestore.S
+endif
+
 LOCAL_CFLAGS := $(LIBCXXABI_CFLAGS)
 LOCAL_CPPFLAGS := $(LIBCXXABI_CPPFLAGS)
+
+ifeq ($(HOST_OS),darwin)
+LOCAL_SRC_FILES += src/Unwind/Unwind_AppleExtras.cpp
+# libcxxabi really doesn't like the non-LLVM assembler on Darwin
+LOCAL_ASFLAGS += -integrated-as
+LOCAL_CFLAGS += -integrated-as
+LOCAL_CPPFLAGS += -integrated-as
+endif
+
 LOCAL_LDFLAGS := -lpthread
 LOCAL_RTTI_FLAG := $(LIBCXXABI_RTTI_FLAG)
 include $(BUILD_HOST_SHARED_LIBRARY)
