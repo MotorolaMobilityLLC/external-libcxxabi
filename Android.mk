@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+# libcxxabi isn't working on mips yet
+ifneq ($(TARGET_ARCH),$(filter $(TARGET_ARCH), mips mips64))
 LOCAL_PATH := $(call my-dir)
 
 LIBCXXABI_SRC_FILES := \
@@ -79,3 +81,4 @@ LOCAL_CPPFLAGS := $(LIBCXXABI_CPPFLAGS)
 LOCAL_LDFLAGS := -lpthread
 LOCAL_RTTI_FLAG := $(LIBCXXABI_RTTI_FLAG)
 include $(BUILD_HOST_SHARED_LIBRARY)
+endif
