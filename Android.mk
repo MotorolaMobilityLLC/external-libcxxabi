@@ -17,8 +17,6 @@
 # Don't build for unbundled branches
 ifeq (,$(TARGET_BUILD_APPS))
 
-# libcxxabi isn't working on mips yet
-ifneq ($(TARGET_ARCH),$(filter $(TARGET_ARCH), mips mips64))
 LOCAL_PATH := $(call my-dir)
 
 LIBCXXABI_SRC_FILES := \
@@ -98,6 +96,5 @@ endif
 LOCAL_LDFLAGS := -lpthread
 LOCAL_RTTI_FLAG := $(LIBCXXABI_RTTI_FLAG)
 include $(BUILD_HOST_SHARED_LIBRARY)
-endif
 
 endif  # TARGET_BUILD_APPS
