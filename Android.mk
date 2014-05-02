@@ -93,7 +93,8 @@ LOCAL_CFLAGS += -integrated-as
 LOCAL_CPPFLAGS += -integrated-as
 endif
 
-LOCAL_LDFLAGS := -lpthread
+LOCAL_LDFLAGS := -nostdlib
+LOCAL_LDLIBS := -lpthread -lc -ldl
 LOCAL_RTTI_FLAG := $(LIBCXXABI_RTTI_FLAG)
 include $(BUILD_HOST_SHARED_LIBRARY)
 
