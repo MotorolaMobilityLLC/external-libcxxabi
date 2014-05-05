@@ -301,7 +301,8 @@ inline bool LocalAddressSpace::findFunctionName(pint_t addr, char *buf,
   Dl_info dyldInfo;
   if (dladdr((void *)addr, &dyldInfo)) {
     if (dyldInfo.dli_sname != NULL) {
-      strlcpy(buf, dyldInfo.dli_sname, bufLen);
+      strncpy(buf, dyldInfo.dli_sname, bufLen);
+      buf[bufLen - 1] = '\0';
       *offset = (addr - (pint_t) dyldInfo.dli_saddr);
       return true;
     }
