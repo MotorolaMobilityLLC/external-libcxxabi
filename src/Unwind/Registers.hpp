@@ -15,6 +15,7 @@
 
 #include <stdint.h>
 #include <strings.h>
+#include <string.h>
 
 #include "libunwind.h"
 #include "config.h"
