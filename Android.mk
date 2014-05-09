@@ -70,7 +70,7 @@ LOCAL_SHARED_LIBRARIES := libdl
 endif
 
 LOCAL_SYSTEM_SHARED_LIBRARIES := libc
-include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := libc++abi
@@ -96,6 +96,6 @@ endif
 LOCAL_LDFLAGS := -nostdlib
 LOCAL_LDLIBS := -lpthread -lc -ldl
 LOCAL_RTTI_FLAG := $(LIBCXXABI_RTTI_FLAG)
-include $(BUILD_HOST_SHARED_LIBRARY)
+include $(BUILD_HOST_STATIC_LIBRARY)
 
 endif  # TARGET_BUILD_APPS
