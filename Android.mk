@@ -38,13 +38,15 @@ LIBCXXABI_SRC_FILES := \
 	src/private_typeinfo.cpp \
 	src/stdexcept.cpp \
 	src/typeinfo.cpp \
+
+LLVM_UNWIND_SRC_FILES := \
 	src/Unwind/libunwind.cpp \
+	src/Unwind/Unwind-EHABI.cpp \
 	src/Unwind/Unwind-sjlj.c \
 	src/Unwind/UnwindLevel1-gcc-ext.c \
 	src/Unwind/UnwindLevel1.c \
 	src/Unwind/UnwindRegistersSave.S \
-
-LIBCXXABI_SRC_FILES_IA := src/Unwind/UnwindRegistersRestore.S
+	src/Unwind/UnwindRegistersRestore.S \
 
 LIBCXXABI_CFLAGS := \
 	-I$(LOCAL_PATH)/include/ \
@@ -59,40 +61,35 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := libc++abi
 LOCAL_CLANG := true
 LOCAL_SRC_FILES := $(LIBCXXABI_SRC_FILES)
-LOCAL_SRC_FILES_x86 := $(LIBCXXABI_SRC_FILES_IA)
-LOCAL_SRC_FILES_x86_64 := $(LIBCXXABI_SRC_FILES_IA)
-
+LOCAL_SRC_FILES_arm := $(LLVM_UNWIND_SRC_FILES)
 LOCAL_CFLAGS := $(LIBCXXABI_CFLAGS)
 LOCAL_CPPFLAGS := $(LIBCXXABI_CPPFLAGS)
 LOCAL_RTTI_FLAG := $(LIBCXXABI_RTTI_FLAG)
-
-LOCAL_SHARED_LIBRARIES_arm := libdl
-
-LOCAL_SYSTEM_SHARED_LIBRARIES := libc
+LOCAL_WHOLE_STATIC_LIBRARIES_arm64 := libunwind
+LOCAL_WHOLE_STATIC_LIBRARIES_mips := libunwind
+LOCAL_WHOLE_STATIC_LIBRARIES_mips64 := libunwind
+LOCAL_WHOLE_STATIC_LIBRARIES_x86 := libunwind
+LOCAL_WHOLE_STATIC_LIBRARIES_x86_64 := libunwind
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := libc++abi
 LOCAL_CLANG := true
-
 LOCAL_SRC_FILES := $(LIBCXXABI_SRC_FILES)
-
-LOCAL_SRC_FILES += $(LIBCXXABI_SRC_FILES_IA)
-
 LOCAL_CFLAGS := $(LIBCXXABI_CFLAGS)
 LOCAL_CPPFLAGS := $(LIBCXXABI_CPPFLAGS)
 
 ifeq ($(HOST_OS),darwin)
-LOCAL_SRC_FILES += src/Unwind/Unwind_AppleExtras.cpp
+LOCAL_SRC_FILES += $(LLVM_UNWIND_SRC_FILES) src/Unwind/Unwind_AppleExtras.cpp
 # libcxxabi really doesn't like the non-LLVM assembler on Darwin
 LOCAL_ASFLAGS += -integrated-as
 LOCAL_CFLAGS += -integrated-as
 LOCAL_CPPFLAGS += -integrated-as
+else
+LOCAL_WHOLE_STATIC_LIBRARIES := libunwindbacktrace
 endif
 
-LOCAL_LDFLAGS := -nostdlib
-LOCAL_LDLIBS := -lpthread -lc -ldl
 LOCAL_RTTI_FLAG := $(LIBCXXABI_RTTI_FLAG)
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 LOCAL_MULTILIB := both
