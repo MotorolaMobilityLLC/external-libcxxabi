@@ -14,9 +14,6 @@
 # limitations under the License.
 #
 
-# Don't build for unbundled branches
-ifeq (,$(TARGET_BUILD_APPS))
-
 LOCAL_PATH := $(call my-dir)
 
 LIBCXXABI_SRC_FILES := \
@@ -94,5 +91,3 @@ LOCAL_RTTI_FLAG := $(LIBCXXABI_RTTI_FLAG)
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 LOCAL_MULTILIB := both
 include $(BUILD_HOST_STATIC_LIBRARY)
-
-endif  # TARGET_BUILD_APPS
