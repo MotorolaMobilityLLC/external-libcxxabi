@@ -96,6 +96,14 @@ _LIBUNWIND_EXPORT void *_Unwind_FindEnclosingFunction(void *pc) {
 }
 
 
+#if 0
+_Unwind_Reason_Code unwindOneFrame(
+    _Unwind_State state,
+    _Unwind_Control_Block* ucbp,
+    struct _Unwind_Context* context,
+    bool ignore_handler_found);
+#endif
+
 /// Walk every frame and call trace function at each one.  If trace function
 /// returns anything other than _URC_NO_REASON, then walk is terminated.
 _LIBUNWIND_EXPORT _Unwind_Reason_Code
