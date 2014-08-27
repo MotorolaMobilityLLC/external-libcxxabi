@@ -96,6 +96,14 @@ _LIBUNWIND_EXPORT void *_Unwind_FindEnclosingFunction(void *pc) {
 }
 
 
+#if 0
+_Unwind_Reason_Code unwindOneFrame(
+    _Unwind_State state,
+    _Unwind_Control_Block* ucbp,
+    struct _Unwind_Context* context,
+    bool ignore_handler_found);
+#endif
+
 /// Walk every frame and call trace function at each one.  If trace function
 /// returns anything other than _URC_NO_REASON, then walk is terminated.
 _LIBUNWIND_EXPORT _Unwind_Reason_Code
@@ -141,6 +149,38 @@ _Unwind_Backtrace(_Unwind_Trace_Fn callback, void *ref) {
                                  result);
       return result;
     }
+
+#if LIBCXXABI_ARM_EHABI
+    // Get the information for this frame.
+    unw_proc_info_t frameInfo;
+    if (unw_get_proc_info(&cursor, &frameInfo) != UNW_ESUCCESS) {
+      return _URC_END_OF_STACK;
+    }
+
+    uint32_t* unwindInfo = (uint32_t *) frameInfo.unwind_info;
+    uint32_t format = ((*unwindInfo & 0x0f000000) >> 24);
+    size_t len, startOffset;
+    switch (format) {
+      case 0:  // Short descriptor, 16-bit entries
+        len = 4;
+        startOffset = 1;
+        break;
+      case 1:  // Long descriptor, 16-bit entries
+      case 3:  // Long descriptor, 32-bit entries
+        len = 4 + 4 * ((*unwindInfo & 0x00ff0000) >> 16);
+        startOffset = 2;
+        break;
+      default:
+        startOffset = 0;
+        break;
+    }
+    // Update the IP address.
+    result = _Unwind_VRS_Interpret((struct _Unwind_Context *)(&cursor),
+        unwindInfo, startOffset, len);
+    if (result != _URC_CONTINUE_UNWIND) {
+      return _URC_END_OF_STACK;
+    }
+#endif  // LIBCXXABI_ARM_EHABI
   }
 }
 
