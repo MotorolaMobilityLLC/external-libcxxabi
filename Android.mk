@@ -72,6 +72,8 @@ LOCAL_WHOLE_STATIC_LIBRARIES_mips64 := libunwind
 LOCAL_WHOLE_STATIC_LIBRARIES_x86 := libunwind
 LOCAL_WHOLE_STATIC_LIBRARIES_x86_64 := libunwind
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+# src/Unwind/UnwindRegistersSave.S does not compile.
+LOCAL_CLANG_ASFLAGS_arm += -no-integrated-as
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
