@@ -84,6 +84,16 @@ LOCAL_WHOLE_STATIC_LIBRARIES_mips64 := libunwind
 LOCAL_WHOLE_STATIC_LIBRARIES_x86 := libunwind
 LOCAL_WHOLE_STATIC_LIBRARIES_x86_64 := libunwind
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+# src/Unwind/UnwindRegistersSave.S does not compile.
+LOCAL_CLANG_ASFLAGS_arm += -no-integrated-as
+# When src/cxa_exception.cpp is compiled with Clang assembler
+# __cxa_end_cleanup_impl, although marked as used, was discarded
+# since it is used only in embedded assembly code.
+# This caused the following warning when linking libc++.so:
+# libc++_static.a(cxa_exception.o)(.text.__cxa_end_cleanup+0x2):
+# warning: relocation refers to discarded section
+# See also http://llvm.org/bugs/show_bug.cgi?id=21292.
+LOCAL_CLANG_CFLAGS_arm += -no-integrated-as
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
