@@ -75,11 +75,11 @@ LOCAL_CPPFLAGS := $(LIBCXXABI_CPPFLAGS)
 LOCAL_CXX_STL := none
 LOCAL_RTTI_FLAG := $(LIBCXXABI_RTTI_FLAG)
 LOCAL_WHOLE_STATIC_LIBRARIES_arm := libunwind_llvm
-LOCAL_WHOLE_STATIC_LIBRARIES_arm64 := libunwind
-LOCAL_WHOLE_STATIC_LIBRARIES_mips := libunwind
-LOCAL_WHOLE_STATIC_LIBRARIES_mips64 := libunwind
-LOCAL_WHOLE_STATIC_LIBRARIES_x86 := libunwind
-LOCAL_WHOLE_STATIC_LIBRARIES_x86_64 := libunwind
+LOCAL_WHOLE_STATIC_LIBRARIES_arm64 := libunwindbacktrace
+LOCAL_WHOLE_STATIC_LIBRARIES_mips := libunwindbacktrace
+LOCAL_WHOLE_STATIC_LIBRARIES_mips64 := libunwindbacktrace
+LOCAL_WHOLE_STATIC_LIBRARIES_x86 := libunwindbacktrace
+LOCAL_WHOLE_STATIC_LIBRARIES_x86_64 := libunwindbacktrace
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 # src/Unwind/UnwindRegistersSave.S does not compile.
 LOCAL_CLANG_ASFLAGS_arm += -no-integrated-as
