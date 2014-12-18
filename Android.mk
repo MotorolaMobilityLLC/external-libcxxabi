@@ -27,6 +27,7 @@ LIBCXXABI_SRC_FILES := \
     src/cxa_handlers.cpp \
     src/cxa_new_delete.cpp \
     src/cxa_personality.cpp \
+    src/cxa_thread_atexit.cpp \
     src/cxa_unexpected.cpp \
     src/cxa_vector.cpp \
     src/cxa_virtual.cpp \
@@ -109,6 +110,7 @@ LOCAL_CFLAGS += -integrated-as
 LOCAL_CPPFLAGS += -integrated-as
 else
 LOCAL_WHOLE_STATIC_LIBRARIES := libunwindbacktrace
+LOCAL_CPPFLAGS += -DHAVE___CXA_THREAD_ATEXIT_IMPL
 endif
 
 LOCAL_RTTI_FLAG := $(LIBCXXABI_RTTI_FLAG)
