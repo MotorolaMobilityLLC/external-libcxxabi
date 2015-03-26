@@ -27,6 +27,7 @@ LIBCXXABI_SRC_FILES := \
     src/cxa_handlers.cpp \
     src/cxa_new_delete.cpp \
     src/cxa_personality.cpp \
+    src/cxa_thread_atexit.cpp \
     src/cxa_unexpected.cpp \
     src/cxa_vector.cpp \
     src/cxa_virtual.cpp \
@@ -75,7 +76,7 @@ LOCAL_MODULE := libc++abi
 LOCAL_CLANG := true
 LOCAL_SRC_FILES := $(LIBCXXABI_SRC_FILES)
 LOCAL_C_INCLUDES := $(LIBCXXABI_INCLUDES)
-LOCAL_CPPFLAGS := $(LIBCXXABI_CPPFLAGS)
+LOCAL_CPPFLAGS := $(LIBCXXABI_CPPFLAGS) -DHAVE___CXA_THREAD_ATEXIT_IMPL
 LOCAL_CPPFLAGS_arm := -DLIBCXXABI_USE_LLVM_UNWINDER=1
 LOCAL_CPPFLAGS_arm64 := -DLIBCXXABI_USE_LLVM_UNWINDER=0
 LOCAL_CPPFLAGS_mips := -DLIBCXXABI_USE_LLVM_UNWINDER=0
