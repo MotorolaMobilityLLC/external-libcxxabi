@@ -69,6 +69,7 @@ LOCAL_CXX_STL := none
 # src/Unwind/UnwindRegistersSave.S does not compile.
 LOCAL_CLANG_ASFLAGS_arm += -no-integrated-as
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+LOCAL_SANITIZE := never
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -96,6 +97,7 @@ LOCAL_CLANG_ASFLAGS_arm += -no-integrated-as
 # warning: relocation refers to discarded section
 # See also http://llvm.org/bugs/show_bug.cgi?id=21292.
 LOCAL_CLANG_CFLAGS_arm += -no-integrated-as
+LOCAL_SANITIZE := never
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
