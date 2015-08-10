@@ -52,7 +52,7 @@ LIBCXXABI_INCLUDES := \
 
 LIBCXXABI_RTTI_FLAG := -frtti
 LIBCXXABI_CPPFLAGS := \
-    -std=c++11 \
+    -std=c++14 \
     -fexceptions \
     -Wall \
     -Wextra \
