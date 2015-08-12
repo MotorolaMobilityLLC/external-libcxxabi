@@ -37,18 +37,10 @@ LIBCXXABI_SRC_FILES := \
     src/stdexcept.cpp \
     src/typeinfo.cpp \
 
-LLVM_UNWIND_SRC_FILES := \
-    src/Unwind/libunwind.cpp \
-    src/Unwind/Unwind-EHABI.cpp \
-    src/Unwind/Unwind-sjlj.c \
-    src/Unwind/UnwindLevel1-gcc-ext.c \
-    src/Unwind/UnwindLevel1.c \
-    src/Unwind/UnwindRegistersSave.S \
-    src/Unwind/UnwindRegistersRestore.S \
-
 LIBCXXABI_INCLUDES := \
-    $(LOCAL_PATH)/include/ \
-    external/libcxx/include/ \
+    $(LOCAL_PATH)/include \
+    external/libcxx/include \
+    external/libunwind_llvm/include \
 
 LIBCXXABI_RTTI_FLAG := -frtti
 LIBCXXABI_CPPFLAGS := \
@@ -58,19 +50,6 @@ LIBCXXABI_CPPFLAGS := \
     -Wextra \
     -Wno-unused-function \
     -Werror \
-
-include $(CLEAR_VARS)
-LOCAL_MODULE := libunwind_llvm
-LOCAL_CLANG := true
-LOCAL_SRC_FILES_arm := $(LLVM_UNWIND_SRC_FILES)
-LOCAL_C_INCLUDES := $(LIBCXXABI_INCLUDES)
-LOCAL_CPPFLAGS := $(LIBCXXABI_CPPFLAGS)
-LOCAL_CXX_STL := none
-# src/Unwind/UnwindRegistersSave.S does not compile.
-LOCAL_CLANG_ASFLAGS_arm += -no-integrated-as
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
-LOCAL_SANITIZE := never
-include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := libc++abi
@@ -84,11 +63,9 @@ LOCAL_CPPFLAGS_mips := -DLIBCXXABI_USE_LLVM_UNWINDER=0
 LOCAL_CPPFLAGS_mips64 := -DLIBCXXABI_USE_LLVM_UNWINDER=0
 LOCAL_CPPFLAGS_x86 := -DLIBCXXABI_USE_LLVM_UNWINDER=0
 LOCAL_CPPFLAGS_x86_64 := -DLIBCXXABI_USE_LLVM_UNWINDER=0
-LOCAL_CXX_STL := none
 LOCAL_RTTI_FLAG := $(LIBCXXABI_RTTI_FLAG)
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
-# src/Unwind/UnwindRegistersSave.S does not compile.
-LOCAL_CLANG_ASFLAGS_arm += -no-integrated-as
+LOCAL_CXX_STL := none
+LOCAL_SANITIZE := never
 # When src/cxa_exception.cpp is compiled with Clang assembler
 # __cxa_end_cleanup_impl, although marked as used, was discarded
 # since it is used only in embedded assembly code.
@@ -97,7 +74,6 @@ LOCAL_CLANG_ASFLAGS_arm += -no-integrated-as
 # warning: relocation refers to discarded section
 # See also http://llvm.org/bugs/show_bug.cgi?id=21292.
 LOCAL_CLANG_CFLAGS_arm += -no-integrated-as
-LOCAL_SANITIZE := never
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -106,17 +82,16 @@ LOCAL_CLANG := true
 LOCAL_SRC_FILES := $(LIBCXXABI_SRC_FILES)
 LOCAL_C_INCLUDES := $(LIBCXXABI_INCLUDES)
 LOCAL_CPPFLAGS := $(LIBCXXABI_CPPFLAGS)
+LOCAL_RTTI_FLAG := $(LIBCXXABI_RTTI_FLAG)
+LOCAL_MULTILIB := both
 LOCAL_CXX_STL := none
+LOCAL_SANITIZE := never
 
 ifeq ($(HOST_OS),darwin)
-LOCAL_SRC_FILES += $(LLVM_UNWIND_SRC_FILES) src/Unwind/Unwind_AppleExtras.cpp
 # libcxxabi really doesn't like the non-LLVM assembler on Darwin
 LOCAL_ASFLAGS += -integrated-as
 LOCAL_CFLAGS += -integrated-as
 LOCAL_CPPFLAGS += -integrated-as
 endif
 
-LOCAL_RTTI_FLAG := $(LIBCXXABI_RTTI_FLAG)
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
-LOCAL_MULTILIB := both
 include $(BUILD_HOST_STATIC_LIBRARY)
