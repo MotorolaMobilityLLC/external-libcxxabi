@@ -49,7 +49,9 @@ cc_library_static {
         "-Wno-unused-function",
         "-Werror",
     ],
-    sanitize: ["never"],
+    sanitize: {
+        never: true,
+    },
     stl: "none",
     rtti: true,
     arch: {
