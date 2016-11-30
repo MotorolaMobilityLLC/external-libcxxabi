@@ -86,6 +86,10 @@ cc_library_static {
             cflags: ["-integrated-as"],
             cppflags: ["-integrated-as"],
         },
+        linux_bionic: {
+            cppflags: ["-DHAVE___CXA_THREAD_ATEXIT_IMPL"],
+            enabled: true,
+        },
     },
 
 }
