@@ -19,6 +19,7 @@ cc_library_static {
     host_supported: true,
     vendor_available: true,
     clang: true,
+    defaults: ["mtk_malloc_debug_defaults"],
     srcs: [
         "src/abort_message.cpp",
         "src/cxa_aux_runtime.cpp",
