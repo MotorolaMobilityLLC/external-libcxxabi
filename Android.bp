@@ -18,7 +18,6 @@ cc_library_static {
     name: "libc++abi",
     host_supported: true,
     vendor_available: true,
-    clang: true,
     srcs: [
         "src/abort_message.cpp",
         "src/cxa_aux_runtime.cpp",
