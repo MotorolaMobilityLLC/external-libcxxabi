@@ -42,13 +42,15 @@ cc_library_static {
     include_dirs: ["external/libcxx/include"],
     local_include_dirs:  ["include"],
     export_include_dirs: ["include"],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
     cppflags: [
         "-std=c++14",
         "-fexceptions",
-        "-Wall",
         "-Wextra",
         "-Wno-unused-function",
-        "-Werror",
     ],
     sanitize: {
         never: true,
