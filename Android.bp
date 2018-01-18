@@ -85,7 +85,7 @@ cc_library_static {
         darwin: {
             // libcxxabi really doesn't like the non-LLVM assembler on Darwin
             asflags: ["-integrated-as"],
-            cflags: ["-integrated-as"],
+            cflags: ["-integrated-as", "-D_LIBCPP_DISABLE_AVAILABILITY"],
             cppflags: ["-integrated-as"],
         },
         linux_bionic: {
