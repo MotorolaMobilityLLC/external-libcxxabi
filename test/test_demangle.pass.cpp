@@ -29690,6 +29690,10 @@ const char* cases[][2] =
     // Designated init expressions
     {"_ZN15designated_init1fINS_1AEEEvDTtlT_di1adi1bdxLi3EdXLi1ELi4ELi9EEE", "void designated_init::f<designated_init::A>(decltype(designated_init::A{.a.b[3][1 ... 4] = 9}))"},
     {"_Z1fIXtl1Xdi1adi1bdxLi3ELi1EEEE", "f<X{.a.b[3] = 1}>"},
+
+    // Inheriting constructors:
+    {"_ZN1BCI21AEi", "B::B(int)"},
+    {"_ZN1DCI21CIiEET_", "D::D(int)"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
