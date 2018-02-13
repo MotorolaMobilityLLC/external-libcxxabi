@@ -29658,7 +29658,11 @@ const char* cases[][2] =
     {"_ZNK5test81XIiE3barIiEEDTcl3fooIT_EEEv", "decltype(foo<int>()) test8::X<int>::bar<int>() const"},
 
     // Multiple qualifiers on the same type should all get the same entry in the substitution table.
-    {"_Z1fPU3AS1KiS0_", "f(int const AS1*, int const AS1*)"}
+    {"_Z1fPU3AS1KiS0_", "f(int const AS1*, int const AS1*)"},
+
+    {"_ZN6test471fINS_1SEEEvPTsNT_1cE", "void test47::f<test47::S>(struct test47::S::c*)"},
+    {"_ZN6test481fINS_1SEEEvPTuNT_1uE", "void test48::f<test48::S>(union test48::S::u*)"},
+    {"_ZN6test451fINS_1SEEEvPTeNT_1eE", "void test45::f<test45::S>(enum test45::S::e*)"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
