@@ -29663,6 +29663,33 @@ const char* cases[][2] =
     {"_ZN6test471fINS_1SEEEvPTsNT_1cE", "void test47::f<test47::S>(struct test47::S::c*)"},
     {"_ZN6test481fINS_1SEEEvPTuNT_1uE", "void test48::f<test48::S>(union test48::S::u*)"},
     {"_ZN6test451fINS_1SEEEvPTeNT_1eE", "void test45::f<test45::S>(enum test45::S::e*)"},
+
+    // Initializer list expressions
+    {"_ZN5test43tf2INS_1XEEEvDTnw_T_piilLi1EEEE", "void test4::tf2<test4::X>(decltype(new test4::X({1})))"},
+    {"_ZN5test73fA1IiEEDTcmtlNS_1AELi1ELi2EEcvT__EES2_", "decltype((test7::A{1, 2}) , ((int)())) test7::fA1<int>(int)"},
+    {"_ZN5test73fA2IiEEDTcmcvNS_1AEilLi1ELi2EEcvT__EES2_", "decltype(((test7::A)({1, 2})) , ((int)())) test7::fA2<int>(int)"},
+    {"_ZN5test73fB1IiEEDTcmtlNS_1BELi1ELi2EEcvT__EES2_", "decltype((test7::B{1, 2}) , ((int)())) test7::fB1<int>(int)"},
+    {"_ZN5test73fB2IiEEDTcmcvNS_1BEilLi1ELi2EEcvT__EES2_", "decltype(((test7::B)({1, 2})) , ((int)())) test7::fB2<int>(int)"},
+    {"_ZN5test73fC1IiEEDTcmtlNS_1CEilLi1ELi2EEEcvT__EES2_", "decltype((test7::C{{1, 2}}) , ((int)())) test7::fC1<int>(int)"},
+    {"_ZN5test73fC2IiEEDTcmcvNS_1CEilLi1ELi2EEcvT__EES2_", "decltype(((test7::C)({1, 2})) , ((int)())) test7::fC2<int>(int)"},
+    {"_ZN5test73fD1IiEEDTcmtlNS_1DEL_ZNS_1bEEEcvT__EES2_", "decltype((test7::D{test7::b}) , ((int)())) test7::fD1<int>(int)"},
+    {"_ZN5test73fE1IiEEDTcmtlNS_1EELi1ELi2EEcvT__EES2_", "decltype((test7::E{1, 2}) , ((int)())) test7::fE1<int>(int)"},
+    {"_ZN5test73fE2IiEEDTcmcvNS_1EEilLi1ELi2EEcvT__EES2_", "decltype(((test7::E)({1, 2})) , ((int)())) test7::fE2<int>(int)"},
+    {"_ZN5test73fF1IiEEDTcmtlNS_1FEilLi1ELi2EEEcvT__EES2_", "decltype((test7::F{{1, 2}}) , ((int)())) test7::fF1<int>(int)"},
+    {"_ZN5test73fF2IiEEDTcmcvNS_1FEilLi1ELi2EEcvT__EES2_", "decltype(((test7::F)({1, 2})) , ((int)())) test7::fF2<int>(int)"},
+    {"_ZN5test73fT1IiEEDTtlT_EES1_", "decltype(int{}) test7::fT1<int>(int)"},
+    {"_ZN5test73fT3IiEEDTtlT_Li1EEES1_", "decltype(int{1}) test7::fT3<int>(int)"},
+    {"_ZN5test73fT5INS_1BEEEDTtlT_Li1ELi2EEES2_", "decltype(test7::B{1, 2}) test7::fT5<test7::B>(test7::B)"},
+    {"_ZN5test73fT7INS_1AEEEDTtlT_ilEEES2_", "decltype(test7::A{{}}) test7::fT7<test7::A>(test7::A)"},
+    {"_ZN5test73fT8INS_1AEEEDTcvT_ilEES2_", "decltype((test7::A)({})) test7::fT8<test7::A>(test7::A)"},
+    {"_ZN5test73fT9INS_1AEEEDTtlT_ilLi1EEEES2_", "decltype(test7::A{{1}}) test7::fT9<test7::A>(test7::A)"},
+    {"_ZN5test73fTAINS_1AEEEDTcvT_ilLi1EEES2_", "decltype((test7::A)({1})) test7::fTA<test7::A>(test7::A)"},
+    {"_ZN5test73fTBINS_1CEEEDTtlT_ilLi1ELi2EEEES2_", "decltype(test7::C{{1, 2}}) test7::fTB<test7::C>(test7::C)"},
+    {"_ZN5test73fTCINS_1CEEEDTcvT_ilLi1ELi2EEES2_", "decltype((test7::C)({1, 2})) test7::fTC<test7::C>(test7::C)"},
+
+    // Designated init expressions
+    {"_ZN15designated_init1fINS_1AEEEvDTtlT_di1adi1bdxLi3EdXLi1ELi4ELi9EEE", "void designated_init::f<designated_init::A>(decltype(designated_init::A{.a.b[3][1 ... 4] = 9}))"},
+    {"_Z1fIXtl1Xdi1adi1bdxLi3ELi1EEEE", "f<X{.a.b[3] = 1}>"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
@@ -29798,33 +29825,6 @@ const char *xfail_cases[] = {
 
     // FIXME: Why does clang generate the "cp" expr?
     "_ZN5test11bIsEEDTcp3foocvT__EEES1_",
-
-    // Initializer list expressions:
-    "_ZN5test43tf2INS_1XEEEvDTnw_T_piilLi1EEEE",
-    "_ZN5test43tf3INS_1XEEEvDTnw_T_ilLi1EEE",
-    "_ZN5test73fA1IiEEDTcmtlNS_1AELi1ELi2EEcvT__EES2_",
-    "_ZN5test73fA2IiEEDTcmcvNS_1AEilLi1ELi2EEcvT__EES2_",
-    "_ZN5test73fB1IiEEDTcmtlNS_1BELi1ELi2EEcvT__EES2_",
-    "_ZN5test73fB2IiEEDTcmcvNS_1BEilLi1ELi2EEcvT__EES2_",
-    "_ZN5test73fC1IiEEDTcmtlNS_1CEilLi1ELi2EEEcvT__EES2_",
-    "_ZN5test73fC2IiEEDTcmcvNS_1CEilLi1ELi2EEcvT__EES2_",
-    "_ZN5test73fD1IiEEDTcmtlNS_1DEL_ZNS_1bEEEcvT__EES2_",
-    "_ZN5test73fE1IiEEDTcmtlNS_1EELi1ELi2EEcvT__EES2_",
-    "_ZN5test73fE2IiEEDTcmcvNS_1EEilLi1ELi2EEcvT__EES2_",
-    "_ZN5test73fF1IiEEDTcmtlNS_1FEilLi1ELi2EEEcvT__EES2_",
-    "_ZN5test73fF2IiEEDTcmcvNS_1FEilLi1ELi2EEcvT__EES2_",
-    "_ZN5test73fT1IiEEDTtlT_EES1_",
-    "_ZN5test73fT3IiEEDTtlT_Li1EEES1_",
-    "_ZN5test73fT5INS_1BEEEDTtlT_Li1ELi2EEES2_",
-    "_ZN5test73fT7INS_1AEEEDTtlT_ilEEES2_",
-    "_ZN5test73fT8INS_1AEEEDTcvT_ilEES2_",
-    "_ZN5test73fT9INS_1AEEEDTtlT_ilLi1EEEES2_",
-    "_ZN5test73fTAINS_1AEEEDTcvT_ilLi1EEES2_",
-    "_ZN5test73fTBINS_1CEEEDTtlT_ilLi1ELi2EEEES2_",
-    "_ZN5test73fTCINS_1CEEEDTcvT_ilLi1ELi2EEES2_",
-
-    // Designated init expressions
-    "_ZN15designated_init1fINS_1AEEEvDTtlT_di1adi1bdxLi3EdXLi1ELi4ELi9EEE",
 };
 
 const size_t num_xfails = sizeof(xfail_cases) / sizeof(xfail_cases[0]);
