@@ -29694,6 +29694,22 @@ const char* cases[][2] =
     // Inheriting constructors:
     {"_ZN1BCI21AEi", "B::B(int)"},
     {"_ZN1DCI21CIiEET_", "D::D(int)"},
+
+    // Exception specifiers:
+    {"_Z1bPDoFivE", "b(int (*)() noexcept)"},
+    {"_Z1fILb0EEvPDOT_EFivE", "void f<false>(int (*)() noexcept(false))"},
+    {"_Z1fILb1EEvPDOT_EFivE", "void f<true>(int (*)() noexcept(true))"},
+    {"_Z1gIJEEvPDwDpT_EFivE", "void g<>(int (*)() throw())"},
+    {"_Z1gIJfEEvPDwDpT_EFivE", "void g<float>(int (*)() throw(float))"},
+    {"_Z1hIJEEPDwDpT_iEFivEPDwiS1_EFivE", "int (*h<>(int (*)() throw(int)))() throw(int)"},
+    {"_Z1hIJfEEPDwDpT_iEFivEPDwiS1_EFivE", "int (*h<float>(int (*)() throw(int, float)))() throw(float, int)"},
+    {"_Z1iIJEEPDwiDpT_EFivEPS2_", "int (*i<>(int (*)() throw(int)))() throw(int)"},
+    {"_Z1iIJEEPDwiDpT_EFivES3_", "int (*i<>(int (*)() throw(int)))() throw(int)"},
+    {"_Z1iIJfEEPDwiDpT_EFivEPS2_", "int (*i<float>(int (*)() throw(int, float)))() throw(int, float)"},
+    {"_Z1iIJfEEPDwiDpT_EFivES3_", "int (*i<float>(int (*)() throw(int, float)))() throw(int, float)"},
+    {"_Z1pILb1EEiM1SKDOT_EFivRE", "int p<true>(int (S::*)() const & noexcept(true))"},
+    {"_Z1pIJicfEEiM1SVKDwDpT_EFivOE", "int p<int, char, float>(int (S::*)() const volatile && throw(int, char, float))"},
+    {"_Z1pM1SDoFivE", "p(int (S::*)() noexcept)"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
