@@ -29710,6 +29710,9 @@ const char* cases[][2] =
     {"_Z1pILb1EEiM1SKDOT_EFivRE", "int p<true>(int (S::*)() const & noexcept(true))"},
     {"_Z1pIJicfEEiM1SVKDwDpT_EFivOE", "int p<int, char, float>(int (S::*)() const volatile && throw(int, char, float))"},
     {"_Z1pM1SDoFivE", "p(int (S::*)() noexcept)"},
+
+    {"_ZNKR4llvm8OptionalINS_11MCFixupKindEEdeEv", "llvm::Optional<llvm::MCFixupKind>::operator*() const &"},
+    {"_ZZL23isValidCoroutineContextRN5clang4SemaENS_14SourceLocationEN4llvm9StringRefEENK3$_4clEZL23isValidCoroutineContextS1_S2_S4_E15InvalidFuncDiag", "isValidCoroutineContext(clang::Sema&, clang::SourceLocation, llvm::StringRef)::$_4::operator()(isValidCoroutineContext(clang::Sema&, clang::SourceLocation, llvm::StringRef)::InvalidFuncDiag) const"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
