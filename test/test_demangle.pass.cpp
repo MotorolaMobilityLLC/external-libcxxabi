@@ -29713,6 +29713,9 @@ const char* cases[][2] =
 
     {"_ZNKR4llvm8OptionalINS_11MCFixupKindEEdeEv", "llvm::Optional<llvm::MCFixupKind>::operator*() const &"},
     {"_ZZL23isValidCoroutineContextRN5clang4SemaENS_14SourceLocationEN4llvm9StringRefEENK3$_4clEZL23isValidCoroutineContextS1_S2_S4_E15InvalidFuncDiag", "isValidCoroutineContext(clang::Sema&, clang::SourceLocation, llvm::StringRef)::$_4::operator()(isValidCoroutineContext(clang::Sema&, clang::SourceLocation, llvm::StringRef)::InvalidFuncDiag) const"},
+
+    // ABI tags can apply to built-in substitutions.
+    {"_Z1fSsB1XS_", "f(std::string[abi:X], std::string[abi:X])"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
