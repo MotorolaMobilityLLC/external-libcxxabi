@@ -29716,6 +29716,8 @@ const char* cases[][2] =
 
     // ABI tags can apply to built-in substitutions.
     {"_Z1fSsB1XS_", "f(std::string[abi:X], std::string[abi:X])"},
+
+    {"___Z10blocksNRVOv_block_invoke", "invocation function for block in blocksNRVO()"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
