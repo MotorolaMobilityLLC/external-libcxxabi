@@ -29722,6 +29722,9 @@ const char* cases[][2] =
     // Structured bindings:
     {"_ZDC2a12a2E", "'structured-binding'[a1, a2]"},
     {"_ZN2NSDC1x1yEE", "NS::'structured-binding'[x, y]"},
+
+    {"_ZGRDC1x1yE_", "reference temporary for 'structured-binding'[x, y]"},
+    {"_ZGR1bIvE2_", "reference temporary for b<void>"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
