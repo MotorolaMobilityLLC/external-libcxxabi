@@ -29718,6 +29718,10 @@ const char* cases[][2] =
     {"_Z1fSsB1XS_", "f(std::string[abi:X], std::string[abi:X])"},
 
     {"___Z10blocksNRVOv_block_invoke", "invocation function for block in blocksNRVO()"},
+
+    // Structured bindings:
+    {"_ZDC2a12a2E", "'structured-binding'[a1, a2]"},
+    {"_ZN2NSDC1x1yEE", "NS::'structured-binding'[x, y]"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
@@ -29848,7 +29852,6 @@ void test_invalid_cases()
 
 const char *xfail_cases[] = {
     "_Z1fUa9enable_ifIXLi1EEEv", // enable_if attribute
-    "_ZDC2a12a2E", // decomposition decl
     "_ZW6FooBarE2f3v", // C++ modules TS
 
     // FIXME: Why does clang generate the "cp" expr?
