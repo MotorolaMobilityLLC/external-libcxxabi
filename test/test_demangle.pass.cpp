@@ -29720,10 +29720,10 @@ const char* cases[][2] =
     {"___Z10blocksNRVOv_block_invoke", "invocation function for block in blocksNRVO()"},
 
     // Structured bindings:
-    {"_ZDC2a12a2E", "'structured-binding'[a1, a2]"},
-    {"_ZN2NSDC1x1yEE", "NS::'structured-binding'[x, y]"},
+    {"_ZDC2a12a2E", "[a1, a2]"},
+    {"_ZN2NSDC1x1yEE", "NS::[x, y]"},
 
-    {"_ZGRDC1x1yE_", "reference temporary for 'structured-binding'[x, y]"},
+    {"_ZGRDC1x1yE_", "reference temporary for [x, y]"},
     {"_ZGR1bIvE2_", "reference temporary for b<void>"},
 };
 
