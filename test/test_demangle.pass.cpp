@@ -29604,7 +29604,7 @@ const char* cases[][2] =
     {"PFvRmOE", "void (*)(unsigned long&) &&"},
     {"_ZTW1x", "thread-local wrapper routine for x"},
     {"_ZTHN3fooE", "thread-local initialization routine for foo"},
-    {"_Z4algoIJiiiEEvZ1gEUlDpT_E_", "void algo<int, int, int>(g::'lambda'(int, int, int))"},
+
     // attribute abi_tag
     {"_Z1fB3foov", "f[abi:foo]()"},
     {"_Z1fB3fooB3barv", "f[abi:foo][abi:bar]()"},
@@ -29725,6 +29725,8 @@ const char* cases[][2] =
 
     {"_ZGRDC1x1yE_", "reference temporary for [x, y]"},
     {"_ZGR1bIvE2_", "reference temporary for b<void>"},
+
+    {"_ZZ18test_assign_throwsI20small_throws_on_copyLb0EEvvENKUlRNSt3__13anyEOT_E_clIRS0_EEDaS3_S5_", "auto void test_assign_throws<small_throws_on_copy, false>()::'lambda'(std::__1::any&, auto&&)::operator()<small_throws_on_copy&>(std::__1::any&, auto&&) const"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
