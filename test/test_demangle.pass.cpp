@@ -29732,6 +29732,12 @@ const char* cases[][2] =
     {"_Z1fUa9enable_ifIXLi1EEEv", "f() [enable_if:1]"},
     {"_ZN5test4IdE1fEUa9enable_ifIXeqfL0p_Li1EEXeqfL0p0_Li2EEEi", "test4<double>::f(int) [enable_if:(fp) == (1), (fp0) == (2)]"},
     {"_Z3quxUa9enable_ifIXLi1EEXL_Z9TRUEFACTSEEEi", "qux(int) [enable_if:1, TRUEFACTS]"},
+
+    // Conversion operators:
+    {"_ZN5OuterI4MarpEcv7MuncherIJT_T0_DpT1_EEI4MerpS0_JicfEEEv", "Outer<Marp>::operator Muncher<Merp, Marp, int, char, float><Merp, Marp, int, char, float>()"},
+    {"_ZN5OuterI4MarpEcvT_I4MerpEEv", "Outer<Marp>::operator Merp<Merp>()"},
+    {"_ZZN5OuterI4MarpEcv7MuncherIJT_T0_DpT1_EEI4MerpS0_JicfEEEvEN1ScvS9_Ev", "Outer<Marp>::operator Muncher<Merp, Marp, int, char, float><Merp, Marp, int, char, float>()::S::operator Merp()"},
+    {"_ZN1Scv7MuncherIJDpPT_EEIJFivEA_iEEEv", "S::operator Muncher<int (*)(), int (*) []><int (), int []>()"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
@@ -29799,11 +29805,11 @@ const char* invalid_cases[] =
     "Z1 Z1 IJEEAcvZcvT_EcvT_T_",
     "T_IZaaIJEEAnaaaT_T__",
     "PT_IJPNT_IJEET_T_T_T_)J)JKE",
-//  "1 IJEVNT_T_T_EE",
+    "1 IJEVNT_T_T_EE",
     "AT__ZSiIJEEAnwscT_T__",
     "FSiIJEENT_IoE ",
     "ZTVSiIZTVSiIZTVSiIZTVSiINIJEET_T_T_T_T_ ",
-//  "Ana_T_E_T_IJEffffffffffffffersfffffrsrsffffffbgE",
+    "Ana_T_E_T_IJEffffffffffffffersfffffrsrsffffffbgE",
 };
 
 const unsigned NI = sizeof(invalid_cases) / sizeof(invalid_cases[0]);
