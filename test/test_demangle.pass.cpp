@@ -29727,6 +29727,11 @@ const char* cases[][2] =
     {"_ZGR1bIvE2_", "reference temporary for b<void>"},
 
     {"_ZZ18test_assign_throwsI20small_throws_on_copyLb0EEvvENKUlRNSt3__13anyEOT_E_clIRS0_EEDaS3_S5_", "auto void test_assign_throws<small_throws_on_copy, false>()::'lambda'(std::__1::any&, auto&&)::operator()<small_throws_on_copy&>(std::__1::any&, auto&&) const"},
+
+    // enable_if attributes:
+    {"_Z1fUa9enable_ifIXLi1EEEv", "f() [enable_if:1]"},
+    {"_ZN5test4IdE1fEUa9enable_ifIXeqfL0p_Li1EEXeqfL0p0_Li2EEEi", "test4<double>::f(int) [enable_if:(fp) == (1), (fp0) == (2)]"},
+    {"_Z3quxUa9enable_ifIXLi1EEXL_Z9TRUEFACTSEEEi", "qux(int) [enable_if:1, TRUEFACTS]"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
@@ -29856,7 +29861,6 @@ void test_invalid_cases()
 }
 
 const char *xfail_cases[] = {
-    "_Z1fUa9enable_ifIXLi1EEEv", // enable_if attribute
     "_ZW6FooBarE2f3v", // C++ modules TS
 
     // FIXME: Why does clang generate the "cp" expr?
