@@ -29799,12 +29799,11 @@ const char* invalid_cases[] =
     "Z1 Z1 IJEEAcvZcvT_EcvT_T_",
     "T_IZaaIJEEAnaaaT_T__",
     "PT_IJPNT_IJEET_T_T_T_)J)JKE",
-    "1 IJEVNT_T_T_EE",
+//  "1 IJEVNT_T_T_EE",
     "AT__ZSiIJEEAnwscT_T__",
     "FSiIJEENT_IoE ",
     "ZTVSiIZTVSiIZTVSiIZTVSiINIJEET_T_T_T_T_ ",
-    "_ZSiIJEvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvttvvvvvvET_v",
-    "Ana_T_E_T_IJEffffffffffffffersfffffrsrsffffffbgE",
+//  "Ana_T_E_T_IJEffffffffffffffersfffffrsrsffffffbgE",
 };
 
 const unsigned NI = sizeof(invalid_cases) / sizeof(invalid_cases[0]);
@@ -29813,22 +29812,25 @@ void test()
 {
     std::size_t len = 0;
     char* buf = nullptr;
+    bool failed = false;
     for (unsigned i = 0; i < N; ++i)
     {
         int status;
         char* demang = __cxxabiv1::__cxa_demangle(cases[i][0], buf, &len, &status);
         if (demang == 0 || std::strcmp(demang, cases[i][1]) != 0)
         {
-            std::cout << cases[i][0] << " -> " << cases[i][1] << '\n';
+            std::cout << "ERROR demangling " << cases[i][0] << '\n'
+                      << "expected: " << cases[i][1] << std::endl;
             if (demang)
             {
-                std::cout << "Got instead: " << demang << '\n';
-                assert(std::strcmp(demang, cases[i][1]) == 0);
+                std::cout << " reality: " << demang << '\n' << std::endl;
+                buf = demang;
+                failed = true;
             }
             else
             {
                 std::cout << "Got instead: NULL, " << status << '\n';
-                assert(demang != 0);
+                failed = true;
             }
         }
         else
@@ -29836,6 +29838,7 @@ void test()
             buf = demang;
         }
     }
+    assert(!failed);
     free(buf);
 }
 
