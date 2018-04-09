@@ -29740,6 +29740,9 @@ const char* cases[][2] =
     {"_ZN1Scv7MuncherIJDpPT_EEIJFivEA_iEEEv", "S::operator Muncher<int (*)(), int (*) []><int (), int []>()"},
 
     {"_Z2f8IiJ8identityIiES0_IfEEEvRAsPiDpT0_T_DpNS3_4typeEE_i", "void f8<int, identity<int>, identity<float> >(int (&) [sizeof... (int, identity<int>, identity<float>, int, identity<int>::type, identity<float>::type)])"},
+
+    {"_ZNK13StaticMembersIfE1xMUlvE_clEv", "StaticMembers<float>::x::'lambda'()::operator()() const"},
+    {"_ZNK10inline_varMUlvE_clEv", "inline_var::'lambda'()::operator()() const"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
