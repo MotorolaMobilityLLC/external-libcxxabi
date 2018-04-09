@@ -29738,6 +29738,8 @@ const char* cases[][2] =
     {"_ZN5OuterI4MarpEcvT_I4MerpEEv", "Outer<Marp>::operator Merp<Merp>()"},
     {"_ZZN5OuterI4MarpEcv7MuncherIJT_T0_DpT1_EEI4MerpS0_JicfEEEvEN1ScvS9_Ev", "Outer<Marp>::operator Muncher<Merp, Marp, int, char, float><Merp, Marp, int, char, float>()::S::operator Merp()"},
     {"_ZN1Scv7MuncherIJDpPT_EEIJFivEA_iEEEv", "S::operator Muncher<int (*)(), int (*) []><int (), int []>()"},
+
+    {"_Z2f8IiJ8identityIiES0_IfEEEvRAsPiDpT0_T_DpNS3_4typeEE_i", "void f8<int, identity<int>, identity<float> >(int (&) [sizeof... (int, identity<int>, identity<float>, int, identity<int>::type, identity<float>::type)])"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
