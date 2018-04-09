@@ -29743,6 +29743,12 @@ const char* cases[][2] =
 
     {"_ZNK13StaticMembersIfE1xMUlvE_clEv", "StaticMembers<float>::x::'lambda'()::operator()() const"},
     {"_ZNK10inline_varMUlvE_clEv", "inline_var::'lambda'()::operator()() const"},
+    // C++1z fold expressions:
+    {"_Z6foldl1IJLi1ELi2ELi3EEEv1AIXfLplLi1ET_EE", "void foldl1<1, 2, 3>(A<(1 + ... + (1, 2, 3))>)"},
+    {"_Z6foldr1IJLi1ELi2ELi3EEEv1AIXfRplT_Li1EEE", "void foldr1<1, 2, 3>(A<((1, 2, 3) + ... + 1)>)"},
+    {"_Z5foldlIJLi1ELi2ELi3EEEv1AIXflplT_EE", "void foldl<1, 2, 3>(A<(... + (1, 2, 3))>)"},
+    {"_Z5foldrIJLi1ELi2ELi3EEEv1AIXfrplT_EE", "void foldr<1, 2, 3>(A<((1, 2, 3) + ...)>)"},
+    {"_ZN7PartialIJLi1ELi2EEE5foldrIJLi3ELi4EEEEv1AIXplLi1EplLi2EfRplT_plLi1EplLi2EfrplT_EE", "void Partial<1, 2>::foldr<3, 4>(A<(1) + ((2) + (((3, 4) + ... + (1) + ((2) + (((3, 4) + ...))))))>)"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
