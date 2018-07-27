@@ -29749,6 +29749,10 @@ const char* cases[][2] =
     {"_Z5foldlIJLi1ELi2ELi3EEEv1AIXflplT_EE", "void foldl<1, 2, 3>(A<(... + (1, 2, 3))>)"},
     {"_Z5foldrIJLi1ELi2ELi3EEEv1AIXfrplT_EE", "void foldr<1, 2, 3>(A<((1, 2, 3) + ...)>)"},
     {"_ZN7PartialIJLi1ELi2EEE5foldrIJLi3ELi4EEEEv1AIXplLi1EplLi2EfRplT_plLi1EplLi2EfrplT_EE", "void Partial<1, 2>::foldr<3, 4>(A<(1) + ((2) + (((3, 4) + ... + (1) + ((2) + (((3, 4) + ...))))))>)"},
+
+    // reference collapsing:
+    {"_Z1fIR1SEiOT_", "int f<S&>(S&)"},
+    {"_Z1fIJR1SS0_EEiDpOT_", "int f<S&, S>(S&, S&&)"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
