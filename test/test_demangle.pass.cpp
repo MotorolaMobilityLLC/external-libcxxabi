@@ -29753,6 +29753,8 @@ const char* cases[][2] =
     // reference collapsing:
     {"_Z1fIR1SEiOT_", "int f<S&>(S&)"},
     {"_Z1fIJR1SS0_EEiDpOT_", "int f<S&, S>(S&, S&&)"},
+
+    {"___Z3foo_block_invoke.25", "invocation function for block in foo"},
 };
 
 const unsigned N = sizeof(cases) / sizeof(cases[0]);
