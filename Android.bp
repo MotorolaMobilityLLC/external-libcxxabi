@@ -52,6 +52,8 @@ cc_library_static {
         "-fexceptions",
         "-Wextra",
         "-Wno-unused-function",
+        "-Wno-implicit-fallthrough",
+        // src/cxa_demangle.cpp:2591 -Wimplicit-fallthrough
     ],
     sanitize: {
         never: true,
