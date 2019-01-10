@@ -7,6 +7,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+// XFAIL: c++17
+
 #include <cstdlib>
 #include <algorithm>
 #include <iostream>
