@@ -82,12 +82,6 @@ cc_library_static {
         arm64: {
             cppflags: ["-DLIBCXXABI_USE_LLVM_UNWINDER=0"],
         },
-        mips: {
-            cppflags: ["-DLIBCXXABI_USE_LLVM_UNWINDER=0"],
-        },
-        mips64: {
-            cppflags: ["-DLIBCXXABI_USE_LLVM_UNWINDER=0"],
-        },
         x86: {
             cppflags: ["-DLIBCXXABI_USE_LLVM_UNWINDER=0"],
         },
