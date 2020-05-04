@@ -91,6 +91,7 @@ cc_library_static {
         "//apex_available:platform",
         "//apex_available:anyapex",
     ],
+    min_sdk_version: "apex_inherit",
 }
 
 cc_library_static {
@@ -171,11 +172,17 @@ cc_library_static {
                 "src/stdlib_new_delete.cpp",
             ],
         },
+        windows_x86: {
+            cppflags: [
+                "-fsjlj-exceptions",
+            ],
+        },
     },
     apex_available: [
         "//apex_available:platform",
         "//apex_available:anyapex",
     ],
+    min_sdk_version: "apex_inherit",
 }
 
 cc_fuzz {
