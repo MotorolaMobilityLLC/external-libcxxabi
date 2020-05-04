@@ -21,7 +21,7 @@ cc_defaults {
     recovery_available: true,
     native_bridge_supported: true,
     include_dirs: ["external/libcxx/include"],
-    local_include_dirs:  ["include"],
+    local_include_dirs: ["include"],
     export_include_dirs: ["include"],
     cflags: [
         "-Wall",
@@ -51,6 +51,7 @@ cc_library_static {
         "//apex_available:platform",
         "//apex_available:anyapex",
     ],
+    min_sdk_version: "apex_inherit",
 }
 
 cc_library_static {
@@ -102,7 +103,10 @@ cc_library_static {
         darwin: {
             // libcxxabi really doesn't like the non-LLVM assembler on Darwin
             asflags: ["-integrated-as"],
-            cflags: ["-integrated-as", "-D_LIBCPP_DISABLE_AVAILABILITY"],
+            cflags: [
+                "-integrated-as",
+                "-D_LIBCPP_DISABLE_AVAILABILITY",
+            ],
             cppflags: ["-integrated-as"],
         },
         linux_bionic: {
@@ -132,12 +136,13 @@ cc_library_static {
             cppflags: [
                 "-fsjlj-exceptions",
             ],
-        }
+        },
     },
     apex_available: [
         "//apex_available:platform",
         "//apex_available:anyapex",
     ],
+    min_sdk_version: "apex_inherit",
 }
 
 cc_fuzz {
