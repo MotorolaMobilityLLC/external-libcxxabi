@@ -47,6 +47,10 @@ cc_library_static {
     defaults: ["libc++abi_defaults"],
     host_supported: false,
     srcs: ["src/cxa_demangle.cpp"],
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
 }
 
 cc_library_static {
@@ -136,4 +140,8 @@ cc_library_static {
             ],
         }
     },
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
 }
