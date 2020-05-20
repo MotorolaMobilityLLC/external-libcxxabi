@@ -184,14 +184,3 @@ cc_library_static {
     ],
     min_sdk_version: "apex_inherit",
 }
-
-cc_fuzz {
-    name: "cxa_demangle_fuzzer",
-    host_supported: true,
-    local_include_dirs: ["include"],
-
-    srcs: [
-        "fuzz/cxa_demangle_fuzzer.cpp",
-        "src/cxa_demangle.cpp",
-    ],
-}
