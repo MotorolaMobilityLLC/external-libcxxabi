@@ -132,11 +132,6 @@ cc_library_static {
                 "src/stdlib_new_delete.cpp",
             ],
         },
-        windows_x86: {
-            cppflags: [
-                "-fsjlj-exceptions",
-            ],
-        },
     },
     apex_available: [
         "//apex_available:platform",
