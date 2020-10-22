@@ -18,6 +18,7 @@ cc_defaults {
     name: "libc++abi_defaults",
     vendor_available: true,
     ramdisk_available: true,
+    vendor_ramdisk_available: true,
     recovery_available: true,
     native_bridge_supported: true,
     include_dirs: ["external/libcxx/include"],
