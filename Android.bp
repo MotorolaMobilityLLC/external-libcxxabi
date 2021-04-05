@@ -118,21 +118,7 @@ cc_library_static {
         "src/stdlib_stdexcept.cpp",
         "src/stdlib_typeinfo.cpp",
     ],
-    arch: {
-        arm: {
-            include_dirs: ["external/libunwind_llvm/include"],
-            cppflags: ["-DLIBCXXABI_USE_LLVM_UNWINDER=1"],
-        },
-        arm64: {
-            cppflags: ["-DLIBCXXABI_USE_LLVM_UNWINDER=0"],
-        },
-        x86: {
-            cppflags: ["-DLIBCXXABI_USE_LLVM_UNWINDER=0"],
-        },
-        x86_64: {
-            cppflags: ["-DLIBCXXABI_USE_LLVM_UNWINDER=0"],
-        },
-    },
+    cppflags: ["-DLIBCXXABI_USE_LLVM_UNWINDER=1"],
     target: {
         android: {
             cppflags: ["-DHAVE___CXA_THREAD_ATEXIT_IMPL"],
