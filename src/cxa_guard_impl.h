@@ -41,7 +41,10 @@
 #include "include/atomic_support.h"
 #include <unistd.h>
 #include <sys/types.h>
-#if defined(__has_include)
+// Android Trusty: sys/syscall.h tries to include bits/syscall.h, which is
+// missing. Trusty seems to define _LIBCXXABI_HAS_NO_THREADS, and gettid isn't
+// needed in that case, so skip sys/syscall.h.
+#if defined(__has_include) && !defined(_LIBCXXABI_HAS_NO_THREADS)
 # if __has_include(<sys/syscall.h>)
 #   include <sys/syscall.h>
 # endif
@@ -113,7 +116,10 @@ uint32_t PlatformThreadID() {
   return static_cast<uint32_t>(
       pthread_mach_thread_np(std::__libcpp_thread_get_current_id()));
 }
-#elif defined(SYS_gettid) && defined(_LIBCPP_HAS_THREAD_API_PTHREAD)
+#elif defined(SYS_gettid) && defined(_LIBCPP_HAS_THREAD_API_PTHREAD) && \
+    !defined(__BIONIC__)
+// Bionic: Disable the SYS_gettid feature for now. Some processes on Android
+// block SYS_gettid using seccomp.
 uint32_t PlatformThreadID() {
   static_assert(sizeof(pid_t) == sizeof(uint32_t), "");
   return static_cast<uint32_t>(syscall(SYS_gettid));
