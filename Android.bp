@@ -207,3 +207,11 @@ genrule {
         " include/**/*:include " +
         " NOTICE:NOTICE.libc++abi",
 }
+
+filegroup {
+    name: "libcxxabi_headers",
+    srcs: ["include/*.h"],
+    visibility: [
+        "//external/libcxx:__subpackages__",
+    ],
+}
